@@ -1,0 +1,67 @@
+<!-- First attempt at HTML page for Learning experiment by Emma -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Learning Experiment</title>
+<link rel="stylesheet" href="style_learning.css">
+</head>
+<body>
+<script type="text/javascript" src="learningscript.js"></script>
+<center>
+<p  class="instructions" id="counter"></p>
+<h1 class="instructions" id="welcomeHeader">Mammography Training Experiment</h1>
+<p class="instructions" id="welcomeInstructions">Welcome to the experiment<br>These are the instructions<br>Please read them carefully and then click next.</p>
+<button type="button" id="instructionsButton" onclick="instructionsNext()">Next</button>
+
+<p class="instructions" style="visibility:hidden" id="diagonalInstructions">Enter the length of the diagonal of your monitor here, and select the correct units (inches/cm), then click submit to continue</p>
+<iframe name="diagonaliFrame" style="display:none;"></iframe>
+<form class="userinput" id="resolutionInfoForm" style="visibility:hidden" target="diagonaliFrame">
+	  <label for="diagonalInput">Diagonal:</label>
+  <input type="text" id="diagonalInput" name="Diagonal">
+  <select id="diagonalunit" name="unit">
+  <option value="inch">inches</option>
+  <option value="cm">cm</option>
+</select><br>
+  <input type="submit" id="diagonalSubmit" value="Submit" onclick="imagePixels()">
+</form>
+<br>
+ 
+<!-- Need to add server to use this, probably, unless it can be done through the Javascript/PsychoJS stuff: action="/action_page.php" set this to the place of the server-side script that handles form data
+USe method method="post" to send invisibly or get to set in url and send-->
+<p class="instructions" style="visibility:hidden" id="userInfoInstructions">Enter the following information and then click submit</p>
+
+<form class="userinput" id="userinfoForm" style="visibility:hidden" target="diagonaliFrame">
+  <label for="InitialsInput">Initials:</label>
+  <input type="text" id="InitialsInput" name="Initials"><br>
+  <label for="AgeInput">Age:</label>
+  <input type="text" id="AgeInput" name="Age"><br>
+  <label for="male">Gender:</label>
+ <input type="radio" id="male" name="gender" value="male">
+  <label for="male">Male</label>
+  <input type="radio" id="female" name="gender" value="female">
+  <label for="female">Female</label>
+  <input type="radio" id="other" name="gender" value="other">
+  <label for="other">Other</label><br>
+ <!-- <label for="SessionInput">Session:</label>
+  <input type="number" id="SessionInput" name="session" min="1" max="15">
+  </datalist>-->
+  <input type="submit" id="userInfoSubmit" value="Submit" onclick="validateForm();">
+</form>
+
+<br>
+<img id="breastImageLeft" src="images/lokidoki.png"  style="width:700px;height:500px;display:none;"> <img id="breastImageRight" src="images/lokidoki2.jpg" style="width:700px;height:500px;display:none;">
+<br>
+<br>
+<br>
+<form class="userinput" id="ratingForm" style="visibility:hidden" target="diagonaliFrame" oninput="currentMammo.value=parseInt(mammoRating.value)">
+How likely do you think it is this mammogram comes from a woman who has breast cancer or will develop it in the near future?
+<div class="slidecontainer">
+  0 <input type="range" min="1" max="100" value="50" class="slider" id="mammoRating"> 100
+<br></div>
+  Current rating: <output name="currentMammo" id="currentMammo" for="mammoRating"></output>
+<br>
+  <input type="submit" id="ratingSubmit">
+</form>
+</center>
+</body>
+</html>
