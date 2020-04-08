@@ -24,12 +24,10 @@
 </select><br>
   <input type="submit" id="diagonalSubmit" value="Submit" onclick="imagePixels()">
 </form>
-<br>
  
 <!-- Need to add server to use this, probably, unless it can be done through the Javascript/PsychoJS stuff: action="/action_page.php" set this to the place of the server-side script that handles form data
 USe method method="post" to send invisibly or get to set in url and send-->
 <p class="instructions" style="visibility:hidden" id="userInfoInstructions">Enter the following information and then click submit</p>
-
 <form class="userinput" id="userinfoForm" style="visibility:hidden" target="diagonaliFrame">
   <label for="InitialsInput">Initials:</label>
   <input type="text" id="InitialsInput" name="Initials"><br>
@@ -60,7 +58,7 @@ How likely do you think it is this mammogram comes from a woman who has breast c
 <br></div>
   Current rating: <output name="currentMammo" id="currentMammo" for="mammoRating"></output>
 <br>
-  <input type="submit" id="ratingSubmit">
+  <input type="submit" id="ratingSubmit" onclick="hideSlider()">
 </form>
 </center>
 </body>

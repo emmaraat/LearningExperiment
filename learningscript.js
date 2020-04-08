@@ -44,6 +44,8 @@ function imagePixels() {
 	document.getElementById("breastImageLeft").style = "width:"+imagepixelsize+"px;height:"+imagepixelsize+"px;visibility:hidden";
 	document.getElementById("breastImageRight").style = "width:"+imagepixelsize+"px;height:"+imagepixelsize+"px;visibility:hidden";
 	document.getElementById("userinfoForm").style.visibility = "visible";
+	document.getElementById("userInfoInstructions").style.visibility = "visible";
+	
 }
 
 //Participant info form validation
@@ -70,20 +72,29 @@ function submitForm() {
 	document.getElementById("userinfoForm").style.display = 'none';
 	document.getElementById("breastImageLeft").style.visibility = 'visible';
 	document.getElementById("breastImageRight").style.visibility = 'visible';
+	document.getElementById("userInfoInstructions").style.display = 'none';
 	runTrials()
 }
 
+//Set images to visible on display
+function showImages() {
+	document.getElementById("breastImageLeft").style.display = 'inline';
+	document.getElementById("breastImageRight").style.display = 'inline';
+}
 
+// Change image sources to masks
+function flashMasks() {
+	document.getElementById("breastImageLeft").src = "images/lokidokimask.jpg";
+	document.getElementById("breastImageRight").src = "images/lokidokimask.jpg";
+}
+
+// Set images to invisible again
 function hideImages() {
 	document.getElementById("breastImageLeft").style.display = 'none';
 	document.getElementById("breastImageRight").style.display = 'none';
 }
 
-function flashImages() {
-	document.getElementById("breastImageLeft").style.display = 'inline';
-	document.getElementById("breastImageRight").style.display = 'inline';
-}
-
+// Now make slider and rating instructions visible
 function showSlider() {
 	document.getElementById("mammoRating").style.visibility = 'visible';
 	document.getElementById("currentMammo").style.visibility = 'visible';
@@ -92,6 +103,7 @@ function showSlider() {
 
 }
 
+// Hide slider
 function hideSlider() {
 	document.getElementById("mammoRating").style.visibility = 'hidden';
 	document.getElementById("currentMammo").style.visibility = 'hidden';
@@ -100,20 +112,25 @@ function hideSlider() {
 }
 
 function runTrial() {
-	flashImages()
-	setTimeout(hideImages, 2000);
-	setTimeout(showSlider, 2010);
-	setTimeout(hideSlider, 1010);
+	setTimeout(showImages,0);
+	setTimeout(flashMasks, 2000);
+	setTimeout(hideImages, 2500);
+	setTimeout(showSlider, 2510);
+	
 	var rating = parseInt(document.getElementById("currentMammo").value)
 	return rating
 }
 
 function runTrials() {
-	for (i = 0; i < 10; i++) {
-	flipImages();
+	var i
+	i = 0
+	do {
 	runTrial();
-	document.getElementById("counter").innerHTML = i;
+	hideSlider();
+	document.getElementById("counter").innerHTML = "Trial " + i;
+	i = i +1;
 	}
+	while (i <= 10);
 	
 }
 
