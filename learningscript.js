@@ -19,7 +19,29 @@ let expInfo = {'participantID': '', 'session': '', 'Initials': '', 'Age': '', 'G
 function subjectInfoUpdate(){
 	var subjectInfo = {'Initials': '', 'Age': '', 'Gender': '', 'session': ''}
 
+//// Loading .json file needed to set trial images
+
+fetch('sequences.txt')
+  .then((response) => response.json()) // Transform the data into json
+  .then(function(data) {
+    let authors = data.results;
+
+    })
+  })
+  .catch(function(error) {
+    console.log(error);
+  });   
 */
+
+  
+ 
+//Decide session type
+
+//Decide block order
+
+//Decide trial order for a block
+ 
+
 //Display instructions until 'next' button is clicked
 function instructionsNext() {
 	document.getElementById("welcomeHeader").style.display = 'none';
@@ -65,7 +87,7 @@ function validateForm() {
   }
       alert("Gender must be filled out");
 }
-
+//Participant info form submitting
 function submitForm() {
 	document.getElementById("diagonalInstructions").style.display = 'none';
 	document.getElementById("resolutionInfoForm").style.display = 'none';
@@ -73,7 +95,7 @@ function submitForm() {
 	document.getElementById("breastImageLeft").style.visibility = 'visible';
 	document.getElementById("breastImageRight").style.visibility = 'visible';
 	document.getElementById("userInfoInstructions").style.display = 'none';
-	runTrials()
+	runTrial()
 }
 
 //Set images to visible on display
@@ -94,45 +116,54 @@ function hideImages() {
 	document.getElementById("breastImageRight").style.display = 'none';
 }
 
+var timeShowSlider
+var timeSubmitSlider
+var reactionTime = 0
 // Now make slider and rating instructions visible
 function showSlider() {
 	document.getElementById("mammoRating").style.visibility = 'visible';
 	document.getElementById("currentMammo").style.visibility = 'visible';
 	document.getElementById("ratingForm").style.visibility = 'visible';
-		document.getElementById("ratingSubmit").style.visibility = 'visible';
+	document.getElementById("ratingSubmit").style.visibility = 'visible';
+	timeShowSlider = Date.now();
 
 }
 
+var counter = 1
 // Hide slider
 function hideSlider() {
+	timeSubmitSlider = Date.now();
+	reactionTime = timeSubmitSlider - timeShowSlider;
 	document.getElementById("mammoRating").style.visibility = 'hidden';
 	document.getElementById("currentMammo").style.visibility = 'hidden';
 	document.getElementById("ratingForm").style.visibility = 'hidden';
 	document.getElementById("ratingSubmit").style.visibility = 'hidden';
+	if (counter < 10) {
+		// reset slider values
+		document.getElementById("mammoRating").value = 50;
+		document.getElementById("currentMammo").innerHTML = 50;
+		// start new trial
+		runTrial();
+	}
+	else {
+		// show end text
+		document.getElementById("endText").innerHTML = "The end. Thank you for your time";
+		// save data??
+	}
+	
 }
 
 function runTrial() {
+	document.getElementById("counter").innerHTML = "Trial " + counter + "Previous RT" + reactionTime;
 	setTimeout(showImages,0);
 	setTimeout(flashMasks, 2000);
 	setTimeout(hideImages, 2500);
 	setTimeout(showSlider, 2510);
-	
+	counter = counter + 1;
 	var rating = parseInt(document.getElementById("currentMammo").value)
 	return rating
 }
 
-function runTrials() {
-	var i
-	i = 0
-	do {
-	runTrial();
-	hideSlider();
-	document.getElementById("counter").innerHTML = "Trial " + i;
-	i = i +1;
-	}
-	while (i <= 10);
-	
-}
 
 // Slider for ratings
 var slider = document.getElementById("mammoRating");

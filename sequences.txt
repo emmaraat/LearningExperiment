@@ -1,0 +1,22 @@
+{
+   "images":[
+      "AC1",
+      "AC2",
+      "AD1",
+      "AD2",
+      "AP1",
+      "AP2",
+      "N1",
+      "N2"
+   ],
+   "folders_session1":[
+      "F0",
+      "F0.5",
+      "F1.5"
+   ],
+   "folders_session2":[
+      "F0",
+      "F1",
+      "F2"
+   ]
+}
