@@ -34,6 +34,13 @@ body {
 height: 25px;
 }
 
+.fixation {
+	    color: white;
+	text-align:center;
+	font-size: 350%;
+	vertical-align: center;
+}
+
 /* The slider itself */
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
