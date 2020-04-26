@@ -7,60 +7,195 @@
 </head>
 <body>
 <script type="text/javascript" src="learningscript.js"></script>
-<center>
-<p  class="instructions" id="counter"></p>
-<h1 class="instructions" id="welcomeHeader">Mammography Training Experiment</h1>
-<p class="instructions" id="welcomeInstructions">Welcome to the experiment<br>These are the instructions<br>Please read them carefully and then click next.</p>
-<button type="button" id="instructionsButton" onclick="instructionsNext()">Next</button>
+<p  class="counter" id="counter"></p>
+<h1 class="consent" id="consentHeader">The effect of Spatial Frequency on Perceiving Abnormalities in Mammograms</h1>
 
-<p class="instructions" style="visibility:hidden" id="diagonalInstructions">Enter the length of the diagonal of your monitor here, and select the correct units (inches/cm), then click submit to continue</p>
+<p class="consent" id="experimentIntroStart">
+The University of York would like to invite you to take part in the following research project.<br>
+Before agreeing to take part, please read this information sheet carefully and let us know if anything is unclear or you would like further information.<br><br>
+The study is designed to investigate the effect of spatial frequency on the perception of abnormalities in mammograms based on a short flash of the image.<br>
+You have been invited to take part because you are a specialist health practitioner (radiographer or radiologist) with formal qualification and/or experience in mammography image interpretation.<br><br>
+
+<em><b>IMPORTANT:</b> This experiment needs to be done on a <u>laptop or PC</u> with a <u>working internet connection</u>.<br> 
+Try to use the device with the best screen resolution and size available to you.<br>
+You can only do this experiment in the following browsers: <u>Google Chrome, Firefox, Safari.</u><br>
+Switch to one of these browsers if you are currently in a different one.<br>
+Make sure your browser is taking up the whole screen.<br>
+Try to find a <u>quiet environment with minimal distractions</u> before starting this experiment<br><br></em>
+Click next to continue.
+</p>
+
+<p class="consent" id="experimentIntro" style="display:none">
+In this experiment, bilateral mammograms with either CC or MLO view will be presented to you for 500 milliseconds.<br> 
+After viewing the image, you will be asked to rate how certain you are that the mammograms came<br> from a woman with breast cancer, or who will develop it in the near future, on a scale of 0 (no) to 100 (yes).<br> 
+Some of the mammograms you will see have been artificially modified to change their spatial frequency.<br> 
+Try to not let this influence your decision, focus only on your impression of the abnormality of the mammogram.<br> 
+A typical session will last approximately 30 minutes.<br><br>
+Click next to continue.
+</p>
+
+<p class="consent" id="consentInstructions" style="display:none">
+Before participating, read this information carefully and decide if you consent to participate.<br>
+Participation to this experiment is completely voluntary.<br> 
+If you change your mind at any point during the study, you are be able to withdraw your participation by exiting the browser window without having to provide a reason.<br><br>
+
+Data will be accessible to the project team at York only. Data will not be transferred internationally.<br> 
+Anonymised data may be reused by the research team or other third parties for secondary research and/or teaching purposes.<br>    
+All recorded information from the experiments will be kept by reference to a participant study number and will not be tied to the participants name. No one else will have access to this material.<br>  
+Participants results will be pooled and no individual names are used in publications.<br><br>  
+
+The experiment does not require or provide any potentially confidential material. Confidentiality will be ensured at all times in accordance with the Data Protection Act 1998.<br>
+Some parts of the data collected for the study may be looked at by the research team from the University of York to check that the study is being carried out correctly. <br>
+All will have a duty of confidentiality to you as a research participant and nothing that could reveal your identity will be disclosed outside the research site.<br><br>
+
+If you have any questions about this participant information sheet or concerns about how your data is being processed, please contact Karla Evans the first instance.<br> 
+Karla Evans, Department of Psychology, Phone:	+44 1904 324601 E-mail: <a style="color: white;" href = "mailto: karla.evans@york.ac.uk">karla.evans@york.ac.uk</a><br>
+If you are still dissatisfied, please contact the University's Acting Data Protection Officer at <a style="color: white;" href = "mailto: dataprotection@york.ac.uk">dataprotection@york.ac.uk</a>.<br> <br>
+
+Clicking the button below will open this window in full screen mode. Please stay in full screen mode for the duration of the experiment.<br>
+If you understand this information and agree to take part in this experiment, click the button below to consent and continue to the instructions.
+</p>
+
+<div class="buttonDiv"><button class ="button" type="button" id="nextButton_1" style="display:block" onclick="introNext_First()">Next</button> <button class ="button" type="button" id="nextButton_2" style="display:none" onclick="introNext_Second()">Next</button></div>
+<div class="buttonDiv"><button class ="button" type="button" id="consentButton" style="display:none" onclick="consentClick()">I understand and agree</button></div>
+
+<h2  class="instructions" id="diagonalHeader"  style="display:none"><br>Settings</h2>
+<p class="instructions" style="display:none" id="diagonalInstructions">Before you can begin, we need to collect some information to correctly scale the images on your screen.<br><br>
+If you know the exact diagonal length of your screen, you can enter it below with the correct unit (inches or cm).<br>
+Then click <u>submit diagonal</u> to continue.
+</p>
 <iframe name="diagonaliFrame" style="display:none;"></iframe>
-<form class="userinput" id="resolutionInfoForm" style="visibility:hidden" target="diagonaliFrame">
+<form class="userinput" id="resolutionInfoForm" style="display:none" target="diagonaliFrame">
 	  <label for="diagonalInput">Diagonal:</label>
   <input type="text" id="diagonalInput" name="Diagonal">
   <select id="diagonalunit" name="unit">
   <option value="inch">inches</option>
   <option value="cm">cm</option>
 </select><br>
-  <input type="submit" id="diagonalSubmit" value="Submit" onclick="imagePixels()">
+  <input type="submit" id="diagonalSubmit" value="Submit diagonal" onclick="validateDiagonalForm()">
 </form>
- 
-<!-- Need to add server to use this, probably, unless it can be done through the Javascript/PsychoJS stuff: action="/action_page.php" set this to the place of the server-side script that handles form data
-USe method method="post" to send invisibly or get to set in url and send-->
-<p class="instructions" style="visibility:hidden" id="userInfoInstructions">Enter the following information and then click submit</p>
-<form class="userinput" id="userinfoForm" style="visibility:hidden" target="diagonaliFrame">
+
+<p class="instructions" id="monitorInstructions"  style="display:none">
+If you do not know the exact diagonal length of your screen, we will use a different calibration method:<br>
+For this method, you will need a credit card or another similar card.<br>
+It can also be a grocery store membership card, your drivers license, or any other card of the same standard card size - 3.37inch or 85.6mm).<br><br>
+
+Scroll down until you see the image on the screen and the slider.<br>
+Now take your card and use it to scale the image on the screen until it matches the size<br>
+Hold your card onto the <u>bottom left corner</u> of the image, and adjust the slider below until the image matches the card.<br>
+<b style="font-style: italic">Make sure you put the card onto your screen. Try to be as accurate as possible!</b><br><br>
+To double check, you can move your card to above/below the image to compare the width.<br>
+When the sizes match, click <u>Submit card size</u> to continue.</p>
+<div class="carddiv" id="cardHolder"><img id="card" src="images/card.png" style="width: 50%;display:none"></div>
+
+<form class="userinput" style="display:none" id="cardForm" target="diagonaliFrame">
+Drag the slider until the size of the image on the screen matches your physical card.
+<div class="slidecontainer">
+Smaller <input type="range" min="15" max="60" value="50" steps="0.1" class="slider" id="cardScale" style="display:none" oninput="scaleImage()"> Larger
+<br>
+<input type="submit" style="display:none" value="Submit card size"id="cardScaleSubmit" onclick="calculatePixelSize()"><br></div>
+</form>
+<br><br>
+
+<p class="instructions" style="display:none" id="userInfoInstructions">This form is used to collect demographic information and details about your experience reading mammograms.<br><br>
+Please fill in your initials, age and gender.<br>
+For years in practice, fill in the years in practice since you specialized and started reading mammograms.<br>
+Please estimate amount of mammograms that you have read in the previous year to the best of your ability.<br>
+Do the same for your estimation of the percentage of your total yearly cases that were mammograms.<br><br>
+
+If you need to change the diagonal input, fill in the correct value, then click submit diagonal again.<br>
+Once all information is correct, click submit to continue to the instructions for the experiment</p>
+<form class="userinput" id="userinfoForm" style="display:none" target="diagonaliFrame">
   <label for="InitialsInput">Initials:</label>
   <input type="text" id="InitialsInput" name="Initials"><br>
+  
   <label for="AgeInput">Age:</label>
   <input type="text" id="AgeInput" name="Age"><br>
+  
   <label for="male">Gender:</label>
  <input type="radio" id="male" name="gender" value="male">
   <label for="male">Male</label>
+  
   <input type="radio" id="female" name="gender" value="female">
   <label for="female">Female</label>
+  
   <input type="radio" id="other" name="gender" value="other">
-  <label for="other">Other</label><br>
- <!-- <label for="SessionInput">Session:</label>
-  <input type="number" id="SessionInput" name="session" min="1" max="15">
-  </datalist>-->
-  <input type="submit" id="userInfoSubmit" value="Submit" onclick="validateForm();">
+  <label for="other">Other/Prefer not to say</label><br>
+  
+  <label for="yearsPractice">Years in practice reading mammograms:</label>
+  <input type="text" id="yearsPractice" name="Years"><br>
+  
+    <label for="caseNumber">Estimated number of mammogram cases read last year:</label>
+  <input type="text" id="caseNumber" name="nCases"><br>
+  
+    <label for="percentageMammo">Percentage of yearly cases that are mammograms:</label>
+  <input type="text" id="percentageMammo" name="Percentage"><br>
+  <input type="submit" id="userInfoSubmit" value="Submit form" onclick="validateForm();">
 </form>
 
+<h1 class="instructions" id="welcomeHeader" style="display:none">Instructions</h1>
+<p class="instructions" id="welcomeInstructions" style="display:none">In this experiment, we are asking you to do something you would never do in real practice:<br>
+We want you to make a decision about a pair of mammograms in a single glance.<br><br>
+
+On each trial, either a CC or MLO view of both breasts will be flashed on the screen.<br>
+You are asked to rate how certain you are that these images come from a woman with breast cancer, or who will develop it in the near future.<br>
+In 50% of these images, there is cancer or it will develop in the near future.<br>
+Some of the images you will see have been artificially modified.<br>
+Try to not let this influence your decision, focus only on your impression of the abnormality of the mammogram.<br> 
+The flashes will be far too short to permit the usual scrutiny you would use,<br>
+but we want to know how much information you can gleam from a single glance.<br>
+Please give it your best shot!<br><br>
+
+To rate your certainty you will use your mouse to adjust the value of a slider on a 0-100 scale.<br>
+Make the rating based on your first impression:<br>
+0 means you are completely certain the images come from a healthy woman who will not develop breast cancer in the near future.<br>
+100 means you are completely certain the images come from a woman who has or will develop breast cancer in the near future.<br>
+Please adopt a liberal criterion, while being as accurate as possible.<br>
+To submit your rating, press the spacebar.<br>
+The next trial will start automatically after you press the space bar, so make sure you are ready and looking at the center of the screen.<br><br>
+
+
+The experiment will start with 3 practice trials. Then, you will do three experimental blocks of 120 trials each.<br>
+A typical session will last approximately 30 minutes.<br><br>
+
+Make sure you are in a quiet environment with minimal distractions and focus only on your screen.<br>
+Make sure you are in <u>full screen mode</u>, use F11 (windows) or Control + Command + F (mac) if you are not in full screen yet.<br><br>
+
+Press next when you have read and understood these instructions.<br>
+Pay close attention, the first practice trial will start automatically!<br>
+</p>
+<button class ="button" type="button" id="instructionsButton" style="display:none" onclick="instructionsNext()">Next</button><br>
+			
+<div class="imagediv" id="imageHolder">
+<img id="breastImageLeft"  style="display:none;"><img id="fixationcross" src='images/fixationcross.png' style="display:none;"><img id="breastImageRight" style="display:none;">
+</div>
+
+
+<p class="instructions" style="display:none" id="linebreaksForRating">
 <br>
-<img id="breastImageLeft" src="images/lokidoki.png"  style="width:700px;height:500px;display:none;"> <img id="breastImageRight" src="images/lokidoki2.jpg" style="width:700px;height:500px;display:none;">
 <br>
 <br>
 <br>
-<form class="userinput" id="ratingForm" style="visibility:hidden" target="diagonaliFrame" oninput="currentMammo.value=parseInt(mammoRating.value)">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br></p>
+<p class="instructions" style="display:none" style="font-size: 120%;" id="blockText"></p>
+<button class="button" type="button" id="blockButton" onclick="startNewBlock()" style="display:none">Start next block</button>
+<form class="userinput" id="ratingForm" style="display:none" target="diagonaliFrame" oninput="currentMammo.value=parseInt(mammoRating.value)">
 How likely do you think it is this mammogram comes from a woman who has breast cancer or will develop it in the near future?
 <div class="slidecontainer">
-  0 <input type="range" min="1" max="100" value="50" class="slider" id="mammoRating"> 100
+  0 <input type="range" min="0" max="100" value="50" class="slider" id="mammoRating"> 100
 <br></div>
   Current rating: <output name="currentMammo" id="currentMammo" for="mammoRating"></output>
-<br>
-  <input type="submit" id="ratingSubmit" onclick="hideSlider()">
+<br><br>
+Press the <b>spacebar</b> to submit this rating and continue to the next trial
+<input type="submit" style="visibility:hidden" value="this button" style="font-size:80%" id="ratingSubmit" onclick="hideSlider()">
 </form>
-<p class="instructions" id="endText"></p>
-</center>
+
+<button class ="button" type="button" style="display:none" id="savefile" onclick="saveDataLocally()">Save to file</button>
 </body>
 </html>

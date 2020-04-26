@@ -9,12 +9,39 @@ html {
 body {
     justify-content: center;
 	background-color: #000000;
+	font-family: Calibri, Arial, sans-serif;
 }
 
-.instructions {
+.button {
+	font-size: 100%;
+	margin: 0 auto;
+	display:"block";
+	text-align:center;
+}
+
+.buttondiv {
+	display: flex; 
+	justify-content: center; 
+	
+	}
+
+.counter {
+	color: white;
+	font-size: 125%;
+	margin-left:25px;
+}
+
+.consent {
     color: white;
 	text-align:center;
-	font-size: 130%;
+	font-size: 105%;
+	display: "block";
+}
+.instructions {
+	display: "block";
+    color: white;
+	text-align:center;
+	font-size: 110%;
 }
 .outputtxt	{    
 	color: white;
@@ -26,12 +53,39 @@ body {
     color: white;
 	text-align:center;
 	font-size: 130%;
+	display: "block";
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 .slidecontainer {
   width: 100%; /* Width of the outside container */
     color: white;
-height: 25px;
+	height: 25px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.carddiv {
+	text-align: left;
+	display: table; /* shrink wrap the contents */
+	margin: 0 auto; /* center via left/right margins */
+}
+
+.imagediv {
+	text-align: center;
+	display: table; /* shrink wrap the contents */
+	margin: 0 auto; /* center via left/right margins */
+}
+
+.fixation {
+	color: white;
+	text-align:center;
+	font-size: 350%;
+	vertical-align: center;
 }
 
 /* The slider itself */
